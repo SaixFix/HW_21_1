@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Dict
 
 from entity.abstract_storage import AbstractStorage
+from exeptions import NoteEnoughSpaceError, NoteEnoughItemsError
 
 
 class BaseStorage(AbstractStorage):
@@ -11,7 +12,7 @@ class BaseStorage(AbstractStorage):
 
     def add(self, name: str, qnt: int) -> None:
         if self.get_free_space() < qnt:
-            pass
+            raise NoteEnoughSpaceError
 
         if name in self.__items:
             self.__items[name] += qnt
@@ -19,11 +20,13 @@ class BaseStorage(AbstractStorage):
             self.__items[name] = qnt
 
     def remove(self, name: str, qnt: int) -> None:
-        if name in self.__items:
-            if qnt <= self.__items[name]:
-                self.__items[name] -= qnt
-                if self.__items[name] == 0:
-                    self.__items.pop(name)
+        if name not in self.__items or qnt > self.__items[name]:
+            raise NoteEnoughItemsError
+
+        self.__items[name] -= qnt
+        if self.__items[name] == 0:
+            self.__items.pop(name)
+
 
     def get_free_space(self) -> int:
         return self.__capacity - sum(self.__items.values())

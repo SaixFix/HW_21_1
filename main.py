@@ -28,21 +28,21 @@ storages: Dict[str, AbstractStorage] = {
 
 
 def main():
+    while True:
+        for storage_name, storage in storages.items():
+            print(f'В {storage_name} хранится:\n{storage.get_items()}')
 
-    for storage_name, storage in storages.items():
-        print(f'В {storage_name} хранится:\n{storage.get_items()}')
+        raw_request: str = input(
+            f"Введите запрос в формате 'Доставить 3 печеньки из склад в магазин',"
+            f"Введите 'стоп' чтобы закончить"
+        )
 
-    raw_request: str = input(
-        f"Введите запрос в формате 'Доставить 3 печеньки из склад в магазин',"
-        f"Введите 'стоп' чтобы закончить"
-    )
+        if 'стоп' in raw_request:
+            break
 
-    if 'стоп' in raw_request:
-        return #todo: 'Доделать'
-
-    request = Request(request=raw_request, storages=storages)
-    courier = Delivery(request=raw_request, storages=storages)
-
+        request = Request(request=raw_request, storages=storages)
+        courier = Delivery(request=request, storages=storages)
+        courier.move()
 if __name__ == '__main__':
     main()
 

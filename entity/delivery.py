@@ -12,10 +12,10 @@ class Delivery:
         self.destination: AbstractStorage = storages[self.request.destination]
 
     def move(self):
-        self.departure.remove(name=self.request.items, value=self.request.quantity)
+        self.departure.remove(self.request.items, self.request.quantity)
         print(f'Курьер забирает {self.request.quantity}шт {self.request.items} из {self.request.departure}')
 
-        self.destination.add(name=self.request.items, value=self.request.quantity)
+        self.destination.add(self.request.items, self.request.quantity)
         print(f'Курьер доставил {self.request.quantity}шт {self.request.items} в {self.request.destination}')
 
 

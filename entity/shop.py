@@ -1,6 +1,7 @@
 from typing import Dict
 
 from entity.base_storage import BaseStorage
+from exeptions import TooManyDifferentItems
 
 
 class Shop(BaseStorage):
@@ -10,7 +11,7 @@ class Shop(BaseStorage):
 
     def add(self, name: str, qnt: int) -> None:
         if self.get_unique_items_count() >= self.max_unique_items:
-            pass
+            raise TooManyDifferentItems
 
         super().add(name, qnt)
 
