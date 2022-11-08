@@ -3,7 +3,6 @@ from typing import Dict
 
 from entity.abstract_storage import AbstractStorage
 from entity.request import Request
-from exeptions import UnknownItemError, NoteEnoughSpaceError
 
 
 class Delivery:
