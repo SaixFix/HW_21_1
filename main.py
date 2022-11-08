@@ -18,7 +18,7 @@ shop = Shop(
     items={
         'конфета': 5,
     },
-    capacity=10,
+    capacity=20,
     max_unique_items=5
 )
 
