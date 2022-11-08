@@ -10,6 +10,10 @@ class NoteEnoughItemsError(BaseError):
     message = 'Не достаточно товара'
 
 
+class UnknownItemError(BaseError):
+    message = 'Такого товара нет'
+
+
 class TooManyDifferentItems(BaseError):
     message = 'Слишком много разных товаров'
 
